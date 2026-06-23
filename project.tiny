@@ -9,5 +9,5 @@ publish:
     - name: 构建
       description: 生成静态文档
       command:
-      - yarn tiny-docs -c configs.yaml publish dist
-      - yarn http-server dist -c-1 -o
+      - yarn tiny-docs -c configs.yaml publish dist/LayaAir-Docs
+      - yarn http-server dist -c-1 -o /LayaAir-Docs/

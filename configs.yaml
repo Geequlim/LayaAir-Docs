@@ -1,9 +1,10 @@
 DocsModule:
   assetsDirs:
     - node_modules/@tinyaxis/tiny-docs/assets
+    - ./assets
   copyright: © 2026 Geequlim. All rights reserved.
   env: development
-  logo: /assets/dev/docs/img/icon.png
+  logo: /assets/icons/layaair.png
   navigator:
     buttons:
       - match: equals
@@ -40,7 +41,7 @@ DocsModule:
       includeFrontmatter: true
       mermaid:
         output: source
-    routePrefix: /
+    routePrefix: /LayaAir-Docs/
   remaps:
     AGENTS:
       order: -1
@@ -52,7 +53,7 @@ DocsModule:
       space: 开发文档
       target: README
       title: 快速开始
-  routePrefix: /
+  routePrefix: /LayaAir-Docs/
   search:
     emptyText: 没有找到相关结果
     enabled: true
