@@ -1,0 +1,4 @@
+[submodule "references/LayaAir-Doc-ZH"]
+	path = references/LayaAir-Doc-ZH
+	url = https://github.com/layabox/LayaAir-Doc-ZH.git
+	branch = LayaAir3.4

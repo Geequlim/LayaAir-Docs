@@ -34,6 +34,18 @@ jobs:
       - name: Build static docs
         run: yarn tiny-docs -c configs.yaml publish dist
 
+      - name: Rewrite hidden routes for GitHub Pages
+        run: |
+          [ ! -d dist/.agents ] || cp -a dist/.agents dist/agents
+          [ ! -d dist/llms/.agents ] || cp -a dist/llms/.agents dist/llms/agents
+          [ ! -d dist/static/.agents ] || cp -a dist/static/.agents dist/static/agents
+          find dist \( -name '*.html' -o -name '*.md' -o -name '*.txt' \) -type f -exec sed -i \
+            -e 's#/LayaAir-Docs/.agents/#/LayaAir-Docs/agents/#g' \
+            -e 's#./llms/.agents/#./llms/agents/#g' \
+            -e 's#llms/.agents/#llms/agents/#g' \
+            -e 's#static/.agents/#static/agents/#g' \
+            {} +
+
       - name: Disable Jekyll processing
         run: touch dist/.nojekyll
 
