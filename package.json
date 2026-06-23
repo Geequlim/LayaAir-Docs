@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "@tinyaxis/tiny-docs": "^1.0.8",
+    "@tinyaxis/toolkit": "^0.2.8",
+    "http-server": "^14.1.1"
+  }
+}

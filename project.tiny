@@ -1,0 +1,13 @@
+develop:
+  actions:
+    - name: 文档
+      description: 启动文档预览
+      command: yarn tiny-docs -c configs.yaml serve -o
+
+publish:
+  actions:
+    - name: 构建
+      description: 生成静态文档
+      command:
+      - yarn tiny-docs -c configs.yaml publish dist
+      - yarn http-server dist -c-1 -o
