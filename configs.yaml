@@ -4,7 +4,7 @@ DocsModule:
     - ./assets
   copyright: © 2026 Geequlim. All rights reserved.
   env: development
-  logo: /assets/icons/layaair.png
+  logo: /assets/layabox-logo.svg
   navigator:
     buttons:
       - match: equals
@@ -16,22 +16,47 @@ DocsModule:
         url: /getting-started
   pages:
     - data:
+        heading: 补充 LayaAir 文档的结构化说明
         features:
-          - description: 集成丰富的开发工具，提供开箱即用的解决方案。
-            image: /assets/dev/docs/img/icons8-app-development.svg
-            title: 功能丰富
-          - description: 自由组合所需服务，专注于业务功能的开发。
-            image: /assets/dev/docs/img/icons8-dependencies.svg
-            title: 模块化开发
-          - description: 采用标准化的开发范式，提升团队协作效率。
-            image: /assets/dev/docs/img/icons8-correction.svg
-            title: 统一规范
+          - description: 先把概念、流程、边界条件和对象关系写成结构化 Markdown，让 Agent 能稳定读取和推理。
+            mark: 01
+            title: Agent 优先组织
+          - description: 将图片、动图和视频中的操作信息补充为可搜索、可引用、可维护的 Markdown 文档。
+            mark: 02
+            title: 用文字补足逻辑
+          - description: 对流程、层级、资源关系和运行机制补充 draw.io 等结构化图表，再渲染成人类方便阅读的页面。
+            mark: 03
+            title: 图表表达结构
+        kicker: LayaAir Documentation
+        lead: 官方资料已经覆盖了大量 LayaAir 使用场景。本项目在此基础上补充更适合检索、引用和 Agent 理解的结构化说明，将图片、动图和视频中的操作信息整理为 Markdown、LLM 入口和图表，再渲染成人类方便阅读的文档站。
+        metrics:
+          - label: 文档版本
+            value: 3.x
+          - label: 内容语言
+            value: ZH
+          - label: 发布目标
+            value: Pages
+        paths:
+          - description: 了解当前文档站的组织方式，以及从哪里开始阅读。
+            href: getting-started
+            index: 01
+            title: 理解整理目标
+          - description: 对照官方中文文档，找出依赖图片视频、缺少文字解释或上下文断裂的部分。
+            externalUrl: https://github.com/layabox/LayaAir-Doc-ZH/tree/LayaAir3.4
+            index: 02
+            title: 对照官方资料
+          - description: 将整理后的 Markdown、图表和 LLM 入口纳入发布流程，优先服务 Agent 检索和复用，同时兼顾人类阅读。
+            href: AGENTS
+            index: 03
+            title: 维护与发布
+        referenceUrl: https://github.com/layabox/LayaAir-Doc-ZH/tree/LayaAir3.4
+        version: LayaAir 3.4
       path: ''
       shell:
         breadcrumbs: false
         footerNoMargin: true
         sidebar: false
-      template: '@docs/pages/index.hbs'
+      template: ./views/home.hbs
       title: 首页
   publish:
     brokenLinks:
@@ -50,16 +75,16 @@ DocsModule:
       title: AGENTS.md
     getting-started:
       order: -1
-      space: 开发文档
+      space: LayaAir 文档
       target: README
       title: 快速开始
   routePrefix: /LayaAir-Docs/
   search:
-    emptyText: 没有找到相关结果
+    emptyText: 没有找到相关文档
     enabled: true
     errorText: 搜索暂时不可用，请稍后重试
-    initialText: 输入关键词开始搜索
-    placeholder: 搜索文档
+    initialText: 输入 LayaAir、组件、资源、脚本、生命周期等关键词开始搜索
+    placeholder: 搜索 LayaAir 文档
     searchingText: 正在搜索...
     shortcut: Ctrl K
   showLineNumbers: false
@@ -68,7 +93,7 @@ DocsModule:
         - linkPrefix: ''
           path: docs
           title: 快速开始
-      title: 开发文档
+      title: LayaAir 文档
     - agentSkillNoOrphanDirs: true
       dirs:
         - path: .agents/skills
@@ -77,8 +102,8 @@ DocsModule:
       order: 100
       title: Agent
       useOrphanDocsAsDirs: true
-  tagline: 文科生视角撰写的技术文档
-  title: LayaAir
+  tagline: 在官方资料基础上补充可读、可搜、适合 Agent 使用的结构化 Markdown 文档
+  title: LayaAir 文档
   workspace: .
 TinyDocsDatabaseModule:
   logger:

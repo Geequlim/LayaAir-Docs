@@ -1,0 +1,406 @@
+<style>
+	.docs-page-main.no-footer-gap .docs-main-custom {
+		max-width: none;
+		padding: 0;
+	}
+
+	.docs-page-main.no-footer-gap .docs-custom-page,
+	.docs-page-main.no-footer-gap [data-pagefind-body] {
+		width: 100%;
+		max-width: none;
+	}
+
+	.laya-home {
+		background:
+			linear-gradient(180deg, #f7fbff 0%, #ffffff 42%, #f8fafc 100%);
+		color: #172033;
+	}
+
+	.laya-hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+		gap: 48px;
+		max-width: 1160px;
+		margin: 0 auto;
+		padding: 72px 24px 56px;
+		align-items: center;
+	}
+
+	.laya-kicker {
+		margin: 0 0 12px;
+		color: #0f766e;
+		font-size: 13px;
+		font-weight: 700;
+		letter-spacing: 0;
+		text-transform: uppercase;
+	}
+
+	.laya-hero h1 {
+		max-width: 780px;
+		margin: 0;
+		color: #101827;
+		font-size: 42px;
+		line-height: 1.05;
+		letter-spacing: 0;
+		white-space: nowrap;
+	}
+
+	.laya-lead {
+		max-width: 720px;
+		margin: 22px 0 0;
+		color: #475569;
+		font-size: 18px;
+		line-height: 1.75;
+	}
+
+	.laya-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-top: 32px;
+	}
+
+	.laya-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 44px;
+		padding: 0 18px;
+		border-radius: 8px;
+		font-size: 14px;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.laya-button-primary {
+		background: #0f766e;
+		color: #ffffff;
+	}
+
+	.laya-button-secondary {
+		border: 1px solid #cbd5e1;
+		background: #ffffff;
+		color: #172033;
+	}
+
+	.laya-hero-panel {
+		border: 1px solid #dbe5f2;
+		border-radius: 8px;
+		background: #ffffff;
+		box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+		padding: 28px;
+	}
+
+	.laya-hero-logo {
+		display: block;
+		width: 220px;
+		max-width: 100%;
+		height: auto;
+		margin-bottom: 28px;
+	}
+
+	.laya-release {
+		display: grid;
+		gap: 6px;
+		padding: 18px 0;
+		border-top: 1px solid #e2e8f0;
+		border-bottom: 1px solid #e2e8f0;
+	}
+
+	.laya-release span,
+	.laya-metrics span {
+		color: #64748b;
+		font-size: 13px;
+	}
+
+	.laya-release strong {
+		color: #101827;
+		font-size: 24px;
+	}
+
+	.laya-metrics {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 12px;
+		margin-top: 20px;
+	}
+
+	.laya-metrics div {
+		display: grid;
+		gap: 4px;
+	}
+
+	.laya-metrics strong {
+		color: #1d4ed8;
+		font-size: 20px;
+	}
+
+	.laya-section {
+		max-width: 1160px;
+		margin: 0 auto;
+		padding: 48px 24px;
+	}
+
+	.laya-section-head {
+		max-width: 720px;
+		margin-bottom: 24px;
+	}
+
+	.laya-section-head h2 {
+		margin: 0;
+		color: #101827;
+		font-size: 30px;
+		line-height: 1.25;
+		letter-spacing: 0;
+	}
+
+	.laya-path-list {
+		display: grid;
+		gap: 12px;
+	}
+
+	.laya-path-item {
+		display: grid;
+		grid-template-columns: 48px minmax(0, 1fr);
+		gap: 16px;
+		align-items: center;
+		padding: 18px;
+		border: 1px solid #dbe5f2;
+		border-radius: 8px;
+		background: #ffffff;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.laya-path-index {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 8px;
+		background: #eef6ff;
+		color: #1d4ed8;
+		font-weight: 800;
+	}
+
+	.laya-path-item strong,
+	.laya-feature-card h3 {
+		display: block;
+		color: #101827;
+		font-size: 17px;
+	}
+
+	.laya-path-item em {
+		display: block;
+		margin-top: 4px;
+		color: #64748b;
+		font-size: 14px;
+		font-style: normal;
+		line-height: 1.6;
+	}
+
+	.laya-feature-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 16px;
+	}
+
+	.laya-feature-card {
+		min-height: 190px;
+		padding: 22px;
+		border: 1px solid #dbe5f2;
+		border-radius: 8px;
+		background: #ffffff;
+	}
+
+	.laya-feature-mark {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		margin-bottom: 18px;
+		border-radius: 8px;
+		background: #fff7ed;
+		color: #c2410c;
+		font-weight: 800;
+	}
+
+	.laya-feature-card h3 {
+		margin: 0 0 10px;
+	}
+
+	.laya-feature-card p {
+		margin: 0;
+		color: #64748b;
+		font-size: 14px;
+		line-height: 1.7;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.laya-home {
+			background:
+				linear-gradient(180deg, #20262f 0%, #1f2329 46%, #191d23 100%);
+			color: var(--docs-text-1);
+		}
+
+		.laya-kicker {
+			color: #5eead4;
+		}
+
+		.laya-hero h1,
+		.laya-section-head h2,
+		.laya-path-item strong,
+		.laya-feature-card h3,
+		.laya-release strong {
+			color: #f1f5f9;
+		}
+
+		.laya-lead,
+		.laya-path-item em,
+		.laya-feature-card p,
+		.laya-release span,
+		.laya-metrics span {
+			color: #b3bcc8;
+		}
+
+		.laya-button-primary {
+			background: #2dd4bf;
+			color: #0f172a;
+		}
+
+		.laya-button-secondary {
+			border-color: #465160;
+			background: #252931;
+			color: #d7dde7;
+		}
+
+		.laya-hero-panel,
+		.laya-path-item,
+		.laya-feature-card {
+			border-color: #393f4b;
+			background: #252931;
+			box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+		}
+
+		.laya-release {
+			border-color: #393f4b;
+		}
+
+		.laya-metrics strong {
+			color: #93c5fd;
+		}
+
+		.laya-path-index {
+			background: rgba(96, 165, 250, 0.14);
+			color: #93c5fd;
+		}
+
+		.laya-feature-mark {
+			background: rgba(251, 146, 60, 0.14);
+			color: #fdba74;
+		}
+
+	}
+
+	@media (max-width: 820px) {
+		.laya-hero {
+			grid-template-columns: 1fr;
+			gap: 28px;
+			padding-top: 48px;
+		}
+
+		.laya-hero h1 {
+			font-size: 34px;
+			white-space: normal;
+		}
+
+		.laya-feature-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.laya-hero,
+		.laya-section {
+			padding-left: 18px;
+			padding-right: 18px;
+		}
+
+		.laya-hero h1 {
+			font-size: 30px;
+		}
+
+		.laya-lead {
+			font-size: 16px;
+		}
+
+		.laya-metrics {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+
+<main class="laya-home">
+	<section class="laya-hero">
+		<div class="laya-hero-content">
+			<p class="laya-kicker">{{data.kicker}}</p>
+			<h1>{{data.heading}}</h1>
+			<p class="laya-lead">{{data.lead}}</p>
+			<div class="laya-actions" aria-label="主要入口">
+				<a class="laya-button laya-button-primary" href="{{routeLink routePrefix "getting-started"}}">开始阅读</a>
+				<a class="laya-button laya-button-secondary" href="{{data.referenceUrl}}" target="_blank" rel="noreferrer">上游文档</a>
+			</div>
+		</div>
+		<div class="laya-hero-panel" aria-label="文档状态">
+			<img class="laya-hero-logo" src="/assets/logo.png" alt="LayaAir 文档重写计划">
+			<div class="laya-release">
+				<span>当前整理方向</span>
+				<strong>{{data.version}}</strong>
+			</div>
+			<div class="laya-metrics">
+				{{#each data.metrics}}
+					<div>
+						<strong>{{value}}</strong>
+						<span>{{label}}</span>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+	</section>
+
+	<section class="laya-section laya-path-section">
+		<div class="laya-section-head">
+			<p class="laya-kicker">Reading Path</p>
+			<h2>按开发流程组织，而不是按资料来源堆叠</h2>
+		</div>
+		<div class="laya-path-list">
+			{{#each data.paths}}
+				<a class="laya-path-item" href="{{#if externalUrl}}{{externalUrl}}{{else}}{{routeLink ../routePrefix href}}{{/if}}"{{#if externalUrl}} target="_blank" rel="noreferrer"{{/if}}>
+					<span class="laya-path-index">{{index}}</span>
+					<span>
+						<strong>{{title}}</strong>
+						<em>{{description}}</em>
+					</span>
+				</a>
+			{{/each}}
+		</div>
+	</section>
+
+	<section class="laya-section laya-grid-section">
+		<div class="laya-section-head">
+			<p class="laya-kicker">Focus</p>
+			<h2>这份文档会优先补足这些内容</h2>
+		</div>
+		<div class="laya-feature-grid">
+			{{#each data.features}}
+				<article class="laya-feature-card">
+					<span class="laya-feature-mark">{{mark}}</span>
+					<h3>{{title}}</h3>
+					<p>{{description}}</p>
+				</article>
+			{{/each}}
+		</div>
+	</section>
+</main>

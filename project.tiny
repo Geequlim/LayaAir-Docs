@@ -2,7 +2,7 @@ develop:
   actions:
     - name: 文档
       description: 启动文档预览
-      command: yarn tiny-docs -c configs.yaml serve -o
+      command: yarn tiny-docs -c configs.yaml serve
 
 publish:
   actions:

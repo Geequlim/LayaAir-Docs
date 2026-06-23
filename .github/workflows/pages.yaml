@@ -40,7 +40,10 @@ jobs:
           [ ! -d dist/llms/.agents ] || cp -a dist/llms/.agents dist/llms/agents
           [ ! -d dist/static/.agents ] || cp -a dist/static/.agents dist/static/agents
           find dist \( -name '*.html' -o -name '*.md' -o -name '*.txt' \) -type f -exec sed -i \
+            -e 's#/LayaAir-Doc./llms/#/LayaAir-Docs/llms/#g' \
             -e 's#/LayaAir-Docs/.agents/#/LayaAir-Docs/agents/#g' \
+            -e 's#/LayaAir-Docs/llms/.agents/#/LayaAir-Docs/llms/agents/#g' \
+            -e 's#/LayaAir-Docs/static/.agents/#/LayaAir-Docs/static/agents/#g' \
             -e 's#./llms/.agents/#./llms/agents/#g' \
             -e 's#llms/.agents/#llms/agents/#g' \
             -e 's#static/.agents/#static/agents/#g' \
