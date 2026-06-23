@@ -2,3 +2,7 @@
 	path = references/LayaAir-Doc-ZH
 	url = https://github.com/layabox/LayaAir-Doc-ZH.git
 	branch = LayaAir3.4
+[submodule "references/LayaAir"]
+	path = references/LayaAir
+	url = https://github.com/layabox/LayaAir.git
+	branch = LayaAir_3.4
