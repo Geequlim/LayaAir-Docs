@@ -53,14 +53,40 @@ DocsModule:
       enabled: true
 ```
 
+## 公开路径映射
+
+发布时会沿用 `spaces[].dirs[].linkPrefix` 声明的公开路径映射。它不只是开发态 sidebar 的链接前缀，而是文档站页面、正文链接、搜索索引、LLM Markdown 镜像和文档依赖静态资源共同使用的 canonical 路径。
+
+例如：
+
+```yaml
+DocsModule:
+  publish:
+    routePrefix: /LayaAir-Docs
+  spaces:
+    - title: Agent
+      dirs:
+        - path: .agents/skills
+          title: skills
+          linkPrefix: agents/skills
+```
+
+发布后会输出到公开路径：
+
+- HTML 页面：`/LayaAir-Docs/agents/skills/...`
+- LLM 镜像：`llms/agents/skills/...`
+- 静态资源：`static/agents/skills/...`
+
+当源码目录包含 `.agents` 这类点号开头目录时，推荐配置 `linkPrefix`，避免静态托管平台对隐藏路径支持不一致，也避免搜索结果或 LLM 链接暴露坏路径。
+
 ## LLM Markdown 镜像
 
 启用 `publish.llm.enabled` 后，发布目录会额外生成一套面向 Agent / LLM 的 Markdown 入口：
 
 - 发布根目录输出 `llms.txt`
 - 默认将 Markdown 文档镜像到 `llms/` 目录
-- 文档间链接会按源码相对路径重写到 `llms/` 下对应的 `.md` 文件
-- 本地静态资源链接会重写到发布目录中的 `static/` 资源
+- 文档间链接会按公开路径重写到 `llms/` 下对应的 `.md` 文件
+- 本地静态资源链接会按公开路径重写到发布目录中的 `static/` 资源
 
 例如发布到 `dist/docs/tiny-docs` 时，默认会得到：
 

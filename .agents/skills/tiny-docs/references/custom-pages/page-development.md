@@ -33,6 +33,24 @@ order: 1
 - `./views/...`：相对当前配置文件目录
 - `views/...`：相对 `workspace`
 
+### 静态资源路径
+
+自定义页面模板可以直接使用 `/assets/...` 引用 `assetsDirs` 中的全站静态资源。
+
+```hbs
+<link rel="stylesheet" href="/assets/pages/home.css">
+<img src="/assets/pages/hero.png" alt="Hero">
+<script src="/assets/pages/home.js"></script>
+```
+
+这条规则同时适用于开发态和发布态：
+
+- 开发态会把 `assetsDirs` 注册到 `/assets`
+- 发布时会把 `assetsDirs` 中的文件复制到产物 `assets/`
+- 如果站点发布在子路径下，页面中的 `/assets/...` 会自动改写成带 `publish.routePrefix` 的路径
+
+因此，写自定义页面时不要因为担心发布路径而回避 `/assets/...`。只有页面专属、未放入 `assetsDirs` 的附加文件，才需要通过 `pages.files` 或代码注册页面的 `files` 显式声明。
+
 ## 模板上下文
 
 模板中可使用下列上下文变量：

@@ -16,7 +16,7 @@ DocsModule:
         url: /getting-started
   pages:
     - data:
-        heading: 补充 LayaAir 文档的结构化说明
+        heading: LayaAir 文档
         features:
           - description: 先把概念、流程、边界条件和对象关系写成结构化 Markdown，让 Agent 能稳定读取和推理。
             mark: 01
@@ -96,7 +96,8 @@ DocsModule:
       title: LayaAir 文档
     - agentSkillNoOrphanDirs: true
       dirs:
-        - path: .agents/skills
+        - linkPrefix: agents/skills
+          path: .agents/skills
           title: skills
       noOrphanDirs: true
       order: 100

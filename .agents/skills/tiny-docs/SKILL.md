@@ -22,13 +22,13 @@ description: tiny-docs 文档应用技能包，说明文档站的概念模型、
 
 `tiny-docs` 还扩展了一部分 Markdown 语法和内容块能力，例如图表、标签页、提示块以及其他文档增强写法。不要只依赖普通 Markdown 经验，遇到这类语法时请直接查看 [Markdown 完整示例](references/markdown.md)。
 
-
 ## 核心概念
 
 文档里会出现一些配置键名，它们对应的中文概念如下：
 
 - `workspace`：文档扫描根目录，文档目录、资源目录和大多数相对路径都以它或配置文件目录为基准解析
 - `spaces`：文档分组配置，用来声明扫描哪些目录，并把它们归到哪个文档分组下
+- `spaces[].dirs[].linkPrefix`：扫描入口的公开路径映射，用来把源码目录映射成文档站公开 URL、LLM 镜像和静态资源使用的 canonical 路径
 - `DocsModule.pages`：自定义页面配置，用来注册首页、演示页、关于页等非 Markdown 页面
 - `navigator.buttons`：顶部导航按钮配置，只决定顶部导航显示什么
 - `sidebar`：文档侧边栏挂载配置，用来决定页面是否进入文档树
@@ -49,12 +49,14 @@ description: tiny-docs 文档应用技能包，说明文档站的概念模型、
 
 这套树结构会直接影响文档侧边栏、面包屑、文档路由和发布时的页面生成。
 
+如果扫描入口使用了 `linkPrefix`，文档树的源码路径和公开路径会分离。比如 `path: .agents/skills`、`linkPrefix: agents/skills` 会让开发态链接生成到 `/dev/agents/skills/...`，发布态链接生成到发布前缀下的 `/agents/skills/...`，同时 LLM Markdown 镜像和静态资源也会使用 `agents/skills/...` 这条公开路径。
+
 ### 文档侧边栏
 
 文档侧边栏主要来自文档树，而不是独立配置一份完整导航数据：
 
 - Markdown 文档的目录结构决定主要文档侧边栏
-- 文档 front matter 可以控制标题、排序、折叠与隐藏
+- 文档 front matter 可以控制标题、描述、排序、折叠与隐藏
 - 自定义页面配置也可以通过 `sidebar` 配置挂到某个文档节点下
 - 代码注册的文档页可以通过 `registerCustomDocPage()` 进入文档树
 
@@ -91,6 +93,8 @@ description: tiny-docs 文档应用技能包，说明文档站的概念模型、
 ### 资源与发布
 
 Markdown 中引用的本地资源会被系统识别并收集，页面模板依赖的资源则需要放入 `assetsDirs` 或通过页面 `files` 显式声明。发布时，只有被识别到的页面和资源会进入静态产物。
+
+自定义页面模板可以放心使用 `/assets/...` 引用 `assetsDirs` 中的全站静态资源。开发态会把这些目录注册到 `/assets`，发布时会复制到产物的 `assets/` 目录，并根据 `publish.routePrefix` 自动改写页面里的 `/assets/...` 引用。不要为了担心发布路径而把这类资源硬改成相对路径。
 
 ## 最小阅读路径
 

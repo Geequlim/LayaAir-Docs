@@ -32,6 +32,7 @@ DocsModule:
 - 静态资源目录列表
 - 用于 logo、图片、样式、脚本等页面依赖资源
 - 相对路径相对配置文件目录解析
+- 目录内容在开发态通过 `/assets/...` 访问，发布时复制到产物 `assets/` 目录
 
 ```yaml
 DocsModule:
@@ -39,6 +40,14 @@ DocsModule:
     - ../node_modules/@tinyaxis/tiny-docs/assets
     - ./assets
 ```
+
+如果 `./assets/hero.png` 在 `assetsDirs` 中，页面模板中应直接写：
+
+```hbs
+<img src="/assets/hero.png" alt="Hero">
+```
+
+发布到子路径时，发布流程会把页面中的 `/assets/...` 改写成带 `publish.routePrefix` 的路径，例如 `/LayaAir-Docs/assets/hero.png`。因此自定义页面里引用全站静态资源时，不需要为了发布态兼容改成相对路径。
 
 ### 站点外观
 
@@ -153,6 +162,7 @@ DocsModule:
       dirs:
         - path: .agents/skills
           title: skills
+          linkPrefix: agents/skills
           agentSkillNoOrphanDirs: space
       useOrphanDocsAsDirs: true
       noOrphanDirs: true
@@ -163,7 +173,7 @@ DocsModule:
 | ------------------------ | -------------------- | ----------------------------------------------- |
 | `title`                  | space 名称           | 展示在侧边栏分组标题上                          |
 | `dirs[]`                 | 扫描入口             | 每个条目描述一个目录入口                        |
-| `linkPrefix`             | 链接前缀             | 覆盖该入口默认生成的路由前缀                    |
+| `linkPrefix`             | 公开路径映射         | 将扫描入口的源码路径映射成文档站公开路径        |
 | `useOrphanDocsAsDirs`    | 孤立文档提升         | 只有单一文档时是否提升为目录入口                |
 | `noOrphanDirs`           | 孤立目录提升         | 目录只包含一个子目录时是否提升子目录            |
 | `agentSkillNoOrphanDirs` | Agent Skill 目录提升 | 是否折叠 Agent Skill 根节点下唯一的无链接子目录 |
@@ -176,8 +186,29 @@ DocsModule:
 | `path`                   | 目录路径             | 相对 `workspace` 或绝对路径                                |
 | `title`                  | 入口标题             | 作为目录入口的展示标题                                     |
 | `context`                | 关联上下文           | 供运行时挂载自定义页面等场景使用                           |
-| `linkPrefix`             | 链接前缀             | 覆盖该入口默认生成的路由前缀                               |
+| `linkPrefix`             | 公开路径映射         | 将该目录下文档、LLM 镜像和静态资源映射到公开路径前缀       |
 | `agentSkillNoOrphanDirs` | Agent Skill 目录提升 | `on` / `off` / `space`；默认 `space`，表示服从所属 `space` |
+
+`linkPrefix` 是源码路径到公开路径的 canonical 映射，不只影响 sidebar 链接。开发态、发布态、正文链接、搜索结果、LLM Markdown 镜像和文档依赖静态资源都会使用同一套公开路径。
+
+典型场景是避免把点号开头目录暴露到公开 URL：
+
+```yaml
+DocsModule:
+  spaces:
+    - title: Agent
+      dirs:
+        - path: .agents/skills
+          title: skills
+          linkPrefix: agents/skills
+```
+
+对应路径会统一变成：
+
+- 开发态页面：`/dev/agents/skills/...`
+- 发布态页面：`/LayaAir-Docs/agents/skills/...`（以 `publish.routePrefix: /LayaAir-Docs` 为例）
+- LLM 镜像：`llms/agents/skills/...`
+- 静态资源：`static/agents/skills/...`
 
 ### Agent Skill 根目录折叠
 
