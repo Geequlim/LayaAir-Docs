@@ -1,6 +1,7 @@
 ---
 title: "3D 对象的渲染链路"
 order: 3
+description: "Mesh、Renderer、Material、Texture 的渲染链路和 PBR 材质基础理解。"
 ---
 
 # 一个 3D 对象是怎么被渲染出来的

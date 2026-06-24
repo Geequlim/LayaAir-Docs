@@ -1,6 +1,7 @@
 ---
 title: "交互效果"
 order: 4
+description: "结构、状态、Tween、Timer 和脚本生命周期在交互效果中的职责分工。"
 ---
 
 # 交互效果应该交给谁来控制

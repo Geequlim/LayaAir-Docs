@@ -1,6 +1,7 @@
 ---
 title: "场景资源的预加载和回收"
 order: 4
+description: "场景资源的依赖收集、预加载策略、close/destroy/clearRes 的边界和回收时机。"
 ---
 
 # 场景资源该怎么预加载和回收

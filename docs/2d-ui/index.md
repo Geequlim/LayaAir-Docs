@@ -1,6 +1,7 @@
 ---
 title: 2D 与 UI
 order: 5
+description: "2D 显示对象组织、资源管理、UI 结构拆分和交互效果控制。"
 ---
 
 # 2D 与 UI

@@ -1,6 +1,7 @@
 ---
 title: "复杂 UI 的拆分"
 order: 3
+description: "复杂 UI 的分层拆法、prefab 边界、列表容器和数据驱动 UI 的组织原则。"
 ---
 
 # 一个复杂 UI 应该怎么拆

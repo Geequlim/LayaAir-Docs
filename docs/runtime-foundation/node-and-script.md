@@ -1,6 +1,7 @@
 ---
 title: "节点和脚本"
 order: 3
+description: "Node 树组织、Component 与 Script 的关系、生命周期顺序和激活销毁边界。"
 ---
 
 # 节点和脚本是如何一起工作的

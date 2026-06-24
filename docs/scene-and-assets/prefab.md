@@ -1,6 +1,7 @@
 ---
 title: "预制体"
 order: 2
+description: "预制体作为可复用层级资源的定义、load 与 create 的区别和适用场景。"
 ---
 
 # 预制体适合解决哪些问题

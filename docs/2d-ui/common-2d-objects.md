@@ -1,6 +1,7 @@
 ---
 title: "常见 2D 对象组织"
 order: 1
+description: "Sprite、Box、Image、Label 的职责边界和 2D 层级组织方式。"
 ---
 
 # 常见 2D 对象应该怎么组织

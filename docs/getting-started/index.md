@@ -1,6 +1,7 @@
 ---
 title: 开始使用
 order: 1
+description: "LayaAir 文档的入口，介绍项目结构、启动方式和核心对象关系。"
 ---
 
 # 开始使用

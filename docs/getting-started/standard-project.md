@@ -1,6 +1,7 @@
 ---
 title: "什么是标准 Laya 项目"
 order: 2
+description: "解释标准 Laya 项目的目录结构、关键文件和资源组织约定。"
 ---
 
 # 什么是标准 Laya 项目

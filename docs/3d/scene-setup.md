@@ -1,6 +1,7 @@
 ---
 title: "3D 场景搭建"
 order: 1
+description: "Scene3D、Sprite3D、Transform3D 的基础关系和 3D 层级组织方式。"
 ---
 
 # 一个 3D 场景是怎么搭起来的

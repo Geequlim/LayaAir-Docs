@@ -1,6 +1,7 @@
 ---
 title: "相机、灯光与可见性"
 order: 2
+description: "Camera、Light、天空盒、层过滤和可见性排查的完整链条。"
 ---
 
 # 为什么这个 3D 场景能被正确看见

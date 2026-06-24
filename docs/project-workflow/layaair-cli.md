@@ -1,6 +1,7 @@
 ---
 title: "如何用 layaair CLI 管理项目"
 order: 1
+description: "layaair CLI 的安装、版本管理、创建项目、预览、构建、校验和脚本执行。"
 ---
 
 # 如何用 `layaair` CLI 管理项目

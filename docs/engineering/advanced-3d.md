@@ -1,6 +1,7 @@
 ---
 title: "3D 进阶能力入门"
 order: 4
+description: "粒子、拖尾、后处理、Shader 和 NavMesh 的学习顺序和入门指引。"
 ---
 
 # 3D 进阶能力应该从哪里开始
