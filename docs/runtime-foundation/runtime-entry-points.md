@@ -14,7 +14,7 @@
 
 另外还有两组经常一起出现、但语义不同的全局信息：
 
-1. `Config`：初始化前配置和全局运行参数
+1. `Laya.Config`：初始化前配置和全局运行参数
 2. `LayaEnv`：当前运行环境状态
 
 理解这几组对象的边界，比背更多 API 更重要。
@@ -24,15 +24,13 @@
 最小初始化代码可以先写成这样：
 
 ```ts
-import { Laya, Sprite } from "LayaAir";
-
 await Laya.init({
   designWidth: 1334,
   designHeight: 750,
   scaleMode: "showall"
 });
 
-const root = new Sprite();
+const root = new Laya.Sprite();
 Laya.stage.addChild(root);
 ```
 
@@ -71,8 +69,6 @@ Laya.stage.addChild(root);
 也就是说，后续高频访问通常不是“对 `Laya` 做什么”，而是“通过 `Laya` 取到对应的运行时对象”：
 
 ```ts
-import { Laya } from "LayaAir";
-
 console.log(Laya.stage.width, Laya.stage.height);
 console.log(Laya.timer.currFrame);
 ```
@@ -92,11 +88,9 @@ console.log(Laya.timer.currFrame);
 最小示例：
 
 ```ts
-import { Laya, Sprite } from "LayaAir";
-
 await Laya.init({ designWidth: 1334, designHeight: 750 });
 
-const box = new Sprite();
+const box = new Laya.Sprite();
 box.size(200, 200);
 Laya.stage.addChild(box);
 ```
@@ -124,11 +118,9 @@ Laya.stage.addChild(box);
 最小示例：
 
 ```ts
-import { Laya, Texture } from "LayaAir";
-
 await Laya.init({ designWidth: 1334, designHeight: 750 });
 
-const logo = await Laya.loader.load("resources/ui/logo.png") as Texture;
+const logo = await Laya.loader.load("resources/ui/logo.png");
 ```
 
 它的职责不是“只加载图片”，而是：
@@ -165,8 +157,6 @@ const logo = await Laya.loader.load("resources/ui/logo.png") as Texture;
 最小示例：
 
 ```ts
-import { Laya } from "LayaAir";
-
 await Laya.init({ designWidth: 1334, designHeight: 750 });
 
 Laya.timer.frameLoop(1, null, () => {
@@ -189,8 +179,6 @@ Laya.timer.frameLoop(1, null, () => {
 最小示例：
 
 ```ts
-import { Laya } from "LayaAir";
-
 await Laya.init({ designWidth: 1334, designHeight: 750 });
 
 Laya.systemTimer.loop(1000, null, () => {
@@ -213,8 +201,6 @@ Laya.systemTimer.loop(1000, null, () => {
 最小示例：
 
 ```ts
-import { Laya } from "LayaAir";
-
 await Laya.init({ designWidth: 1334, designHeight: 750 });
 
 Laya.physicsTimer.frameLoop(1, null, () => {
@@ -233,16 +219,14 @@ Laya.physicsTimer.frameLoop(1, null, () => {
 
 ## `Config` 影响的是初始化前和全局运行方式
 
-`Config` 不是运行时入口对象，但它会直接影响这些入口最终如何被创建和驱动。
+`Laya.Config` 不是运行时入口对象，但它会直接影响这些入口最终如何被创建和驱动。
 
 最关键的一点只有一句话：需要修改时，优先在 `Laya.init()` 之前设置。
 
 ```ts
-import { Config, Laya } from "LayaAir";
-
-Config.useWebGL2 = true;
-Config.isAntialias = false;
-Config.fixedFrames = true;
+Laya.Config.useWebGL2 = true;
+Laya.Config.isAntialias = false;
+Laya.Config.fixedFrames = true;
 
 await Laya.init({
   designWidth: 1334,
@@ -260,18 +244,18 @@ await Laya.init({
 最常见误区是：
 
 1. 先 `await Laya.init()`
-2. 再去改 `Config.useWebGL2`、`Config.isAntialias` 之类初始化期参数
+2. 再去改 `Laya.Config.useWebGL2`、`Laya.Config.isAntialias` 之类初始化期参数
 3. 最后发现结果没有按预期变化
 
 原因不是 API 失效，而是时机错了。
 
 ## `LayaEnv` 描述的是当前运行环境，不是配置项
 
-`LayaEnv` 和 `Config` 很容易被混淆，因为它们看起来都像“全局静态信息”。
+`LayaEnv` 和 `Laya.Config` 很容易被混淆，因为它们看起来都像“全局静态信息”。
 
 但语义完全不同：
 
-1. `Config` 是你设置给引擎的运行参数
+1. `Laya.Config` 是你设置给引擎的运行参数
 2. `LayaEnv` 是引擎当前所处环境的状态描述
 
 最常见的几个环境标记有：
@@ -285,8 +269,6 @@ await Laya.init({
 例如：
 
 ```ts
-import { LayaEnv } from "LayaAir";
-
 if (LayaEnv.isPreview) {
   console.log("当前运行在预览环境");
 }
@@ -317,13 +299,11 @@ if (LayaEnv.isPreview) {
 2. 某些类需要先注册到类表里，序列化资源才能正确还原
 3. 某些子系统会通过 `Laya.addInitCallback()` 或 `Laya.addAfterInitCallback()` 接入初始化链
 
-这也是为什么“import 了 `Laya`”不等于“所有模块都已经可用”。
+这也是为什么“全局 `Laya` 对象已经可访问”不等于“所有模块都已经可用”。
 
 举个最短的理解方式：
 
 ```ts
-import { Laya } from "LayaAir";
-
 await Laya.init({ designWidth: 1334, designHeight: 750 });
 
 // 代码形式没问题，但某类资源或功能是否真的可用，
@@ -351,9 +331,7 @@ await Laya.init({ designWidth: 1334, designHeight: 750 });
 下面这段代码把本文提到的几个核心入口放在一起：
 
 ```ts
-import { Config, Laya, LayaEnv, Sprite, Texture } from "LayaAir";
-
-Config.fixedFrames = true;
+Laya.Config.fixedFrames = true;
 
 await Laya.init({
   designWidth: 1334,
@@ -361,10 +339,10 @@ await Laya.init({
   scaleMode: "showall"
 });
 
-const root = new Sprite();
+const root = new Laya.Sprite();
 Laya.stage.addChild(root);
 
-const logo = await Laya.loader.load("resources/ui/logo.png") as Texture;
+const logo = await Laya.loader.load("resources/ui/logo.png");
 
 Laya.timer.frameLoop(1, root, () => {
   root.rotation += 1;
@@ -377,7 +355,7 @@ if (LayaEnv.isPreview) {
 
 这里每一块的角色分别是：
 
-1. `Config.fixedFrames`：初始化前决定运行节奏策略
+1. `Laya.Config.fixedFrames`：初始化前决定运行节奏策略
 2. `Laya.init(...)`：建立运行时基础设施
 3. `Laya.stage`：承载显示树
 4. `Laya.loader`：把资源带进运行时
@@ -391,7 +369,7 @@ if (LayaEnv.isPreview) {
 1. `Laya.init()` 建立的是运行时基础设施，不是直接打开业务内容
 2. `Laya.stage`、`Laya.loader`、`Laya.timer` 是初始化后的长期入口
 3. `Laya.timer`、`Laya.systemTimer`、`Laya.physicsTimer` 不是同一个时钟
-4. `Config` 是配置，`LayaEnv` 是环境状态
+4. `Laya.Config` 是配置，`LayaEnv` 是环境状态
 5. API 存在不等于对应模块已经完成注册和初始化
 
 ## 结论
@@ -401,7 +379,7 @@ if (LayaEnv.isPreview) {
 1. 用 `Laya.stage` 进入舞台和显示树
 2. 用 `Laya.loader` 让资源进入运行时
 3. 用 `Laya.timer` / `Laya.systemTimer` / `Laya.physicsTimer` 区分不同时序职责
-4. 用 `Config` 把握初始化前配置边界
+4. 用 `Laya.Config` 把握初始化前配置边界
 5. 用 `LayaEnv` 判断当前运行环境
 
 把这五条边界先建立起来，后面再看场景、组件、生命周期和资源系统时，理解成本会低很多。

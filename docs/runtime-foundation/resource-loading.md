@@ -30,11 +30,9 @@ const res = await Laya.loader.load("resources/ui/logo.png");
 先看一个最小例子：
 
 ```ts
-import { Laya, Texture } from "LayaAir";
-
 await Laya.init({ designWidth: 1334, designHeight: 750 });
 
-const logo = await Laya.loader.load("resources/ui/logo.png") as Texture;
+const logo = await Laya.loader.load("resources/ui/logo.png");
 ```
 
 从运行时语义看，这一行代码不是“直接 new 出一个 `Texture`”。更接近下面这条主链：
@@ -141,13 +139,11 @@ const [tex1, tex2] = await Promise.all([a, b]);
 例如：
 
 ```ts
-import { Laya, Sprite, Texture } from "LayaAir";
-
 await Laya.init({ designWidth: 1334, designHeight: 750 });
 
-const tex = await Laya.loader.load("resources/ui/logo.png") as Texture;
+const tex = await Laya.loader.load("resources/ui/logo.png");
 
-const sp = new Sprite();
+const sp = new Laya.Sprite();
 sp.texture = tex;
 Laya.stage.addChild(sp);
 ```
@@ -194,11 +190,9 @@ const icon = Laya.loader.getRes("resources/ui/common/icon.png") as any;
 先看一个预制体例子：
 
 ```ts
-import { Laya, Prefab } from "LayaAir";
-
 await Laya.init({ designWidth: 1334, designHeight: 750 });
 
-const prefab = await Laya.loader.load("resources/prefab/Hud.lh") as Prefab;
+const prefab = await Laya.loader.load("resources/prefab/Hud.lh");
 const hud = prefab.create();
 
 Laya.stage.addChild(hud);
@@ -222,14 +216,12 @@ Laya.stage.addChild(hud);
 1. `load()` 拿到的是“可实例化的资源对象”
 2. `create()` 才拿到“实际运行时对象”
 
-## `Scene.open(...)` 是层级资源链路的更高层封装
+## `Laya.Scene.open(...)` 是层级资源链路的更高层封装
 
 场景也属于层级资源，但业务代码更常直接写：
 
 ```ts
-import { Scene } from "LayaAir";
-
-await Scene.open("scenes/Main.ls");
+await Laya.Scene.open("scenes/Main.ls");
 ```
 
 这比手写 `load() + create() + addChild()` 更高一层。
@@ -241,7 +233,7 @@ await Scene.open("scenes/Main.ls");
 3. 反序列化成场景对应的运行时对象树
 4. 再执行场景实例级的打开流程
 
-所以 `Scene.open(...)` 和 prefab `create()` 的差别，不是前者不走层级资源系统，而是前者把“加载、解析、创建、打开场景”串成了更完整的高层入口。
+所以 `Laya.Scene.open(...)` 和 prefab `create()` 的差别，不是前者不走层级资源系统，而是前者把“加载、解析、创建、打开场景”串成了更完整的高层入口。
 
 ## 层级资源为什么还要单独走一次反序列化
 
@@ -320,7 +312,7 @@ Laya.loader.clearRes("resources/ui/logo.png");
 
 1. `load()` 完成，不等于最终运行时对象已经创建完成
 2. 普通贴图、图集、层级资源的返回值语义不一样
-3. 对层级资源来说，`create()` 和 `Scene.open(...)` 才是进入运行时对象阶段的关键一步
+3. 对层级资源来说，`create()` 和 `Laya.Scene.open(...)` 才是进入运行时对象阶段的关键一步
 4. 模块注册、缓存状态和资源释放都会改变你后续看到的行为
 
 ## 结论
@@ -333,4 +325,4 @@ Laya.loader.clearRes("resources/ui/logo.png");
 4. 再解析成资源对象或可直接使用的结果对象
 5. 如果是层级资源，再继续反序列化成运行时对象树
 
-把这条链路和 `Scene.open(...)`、prefab `create()`、资源释放边界分开之后，很多“明明 load 成功了，为什么还不能直接用”的问题就会清楚很多。
+把这条链路和 `Laya.Scene.open(...)`、prefab `create()`、资源释放边界分开之后，很多“明明 load 成功了，为什么还不能直接用”的问题就会清楚很多。

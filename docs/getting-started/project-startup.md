@@ -14,21 +14,19 @@
 最小链路通常是这样：
 
 ```ts
-import { Laya, Scene } from "LayaAir";
-
 await Laya.init({
   designWidth: 1334,
   designHeight: 750,
   scaleMode: "showall"
 });
 
-await Scene.open("scenes/Main.ls");
+await Laya.Scene.open("scenes/Main.ls");
 ```
 
 这段代码里：
 
 1. `Laya.init(...)` 是引擎启动
-2. `Scene.open(...)` 是项目入口进入第一个场景
+2. `Laya.Scene.open(...)` 是项目入口进入第一个场景
 
 如果只执行 `Laya.init()`，引擎已经可用，但你的项目还没有真正进入业务内容。
 
@@ -62,11 +60,9 @@ await Scene.open("scenes/Main.ls");
 有些配置必须放在 `Laya.init()` 之前，因为它们会影响初始化过程本身。
 
 ```ts
-import { Config, Laya, Scene } from "LayaAir";
-
-Config.useWebGL2 = true;
-Config.isAntialias = false;
-Config.fixedFrames = true;
+Laya.Config.useWebGL2 = true;
+Laya.Config.isAntialias = false;
+Laya.Config.fixedFrames = true;
 
 await Laya.init({
   designWidth: 1334,
@@ -76,12 +72,12 @@ await Laya.init({
   backgroundColor: "#000000"
 });
 
-await Scene.open("scenes/Main.ls");
+await Laya.Scene.open("scenes/Main.ls");
 ```
 
 这里有两类配置：
 
-1. `Config.*` 影响引擎初始化和全局运行方式
+1. `Laya.Config.*` 影响引擎初始化和全局运行方式
 2. `Laya.init({...})` 里的 `stageConfig` 直接参与 `Stage` 创建
 
 这也是一个常见误区：在 `Laya.init()` 之后再改初始化前配置，往往不会得到预期结果。
@@ -97,7 +93,7 @@ await Scene.open("scenes/Main.ls");
 ```ts
 await Laya.init({ designWidth: 1334, designHeight: 750 });
 
-const root = new Sprite();
+const root = new Laya.Sprite();
 Laya.stage.addChild(root);
 ```
 
@@ -108,15 +104,13 @@ Laya.stage.addChild(root);
 这是标准项目里最常见的项目入口形式。
 
 ```ts
-import { Laya, Scene } from "LayaAir";
-
 await Laya.init({ designWidth: 1334, designHeight: 750 });
-await Scene.open("scenes/Main.ls");
+await Laya.Scene.open("scenes/Main.ls");
 ```
 
-这里的关键点不是“场景文件天生就是入口”，而是“你的入口脚本选择把第一个运行内容交给 `Scene.open()`”。
+这里的关键点不是“场景文件天生就是入口”，而是“你的入口脚本选择把第一个运行内容交给 `Laya.Scene.open()`”。
 
-从运行时语义看，`Scene.open(url)` 先加载场景资源，再在内部调用场景实例的 `scene.open()`。真正把场景挂进运行时树的，是实例级的 `open()` 过程：
+从运行时语义看，`Laya.Scene.open(url)` 先加载场景资源，再在内部调用场景实例的 `scene.open()`。真正把场景挂进运行时树的，是实例级的 `open()` 过程：
 
 1. 按需要关闭其他场景
 2. 把当前场景加入场景根节点
@@ -130,12 +124,10 @@ await Scene.open("scenes/Main.ls");
 这更接近真实项目。
 
 ```ts
-import { Laya, Scene } from "LayaAir";
-
 await Laya.init({ designWidth: 1334, designHeight: 750 });
 
 const firstScene = needTutorial ? "scenes/Tutorial.ls" : "scenes/Main.ls";
-await Scene.open(firstScene);
+await Laya.Scene.open(firstScene);
 ```
 
 这时真正的入口不是某个固定场景文件，而是“决定首个运行内容的那段脚本”。
@@ -151,7 +143,7 @@ await Scene.open(firstScene);
 
 启动脚本通常处理这些事：
 
-1. 设置 `Config`
+1. 设置 `Laya.Config`
 2. 调用 `Laya.init()`
 3. 决定是否打开统计、调试、日志或错误捕获
 4. 决定进入哪个场景，或直接创建对象
@@ -210,11 +202,9 @@ await Scene.open(firstScene);
 把前面的关系合起来，可以把标准启动链理解成：
 
 ```ts
-import { Config, Laya, Scene } from "LayaAir";
-
 async function bootstrap() {
-  Config.useWebGL2 = true;
-  Config.fixedFrames = true;
+  Laya.Config.useWebGL2 = true;
+  Laya.Config.fixedFrames = true;
 
   await Laya.init({
     designWidth: 1334,
@@ -223,7 +213,7 @@ async function bootstrap() {
     backgroundColor: "#1e1e1e"
   });
 
-  await Scene.open("scenes/Boot.ls");
+  await Laya.Scene.open("scenes/Boot.ls");
 }
 
 bootstrap();
@@ -231,9 +221,9 @@ bootstrap();
 
 其中每一步的角色分别是：
 
-1. `Config.*` 决定初始化前的全局运行参数
+1. `Laya.Config.*` 决定初始化前的全局运行参数
 2. `Laya.init()` 建立引擎运行时
-3. `Scene.open("scenes/Boot.ls")` 让项目进入第一个场景
+3. `Laya.Scene.open("scenes/Boot.ls")` 让项目进入第一个场景
 
 如果后面还要切换到 `Main.ls`、`Battle.ls` 或别的内容，那已经属于场景流转，不属于引擎启动。
 
