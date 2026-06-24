@@ -1,3 +1,8 @@
+---
+title: "什么时候需要关心 ui2"
+order: 5
+---
+
 # 什么时候需要关心 `ui2`
 
 很多人第一次看到 `ui2`，会先把注意力放在 `Laya.GBox`、`Laya.GButton`、`Laya.GLabel` 这些新名字上。
