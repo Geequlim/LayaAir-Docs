@@ -6,3 +6,6 @@
 	path = references/LayaAir
 	url = https://github.com/layabox/LayaAir.git
 	branch = LayaAir_3.4
+[submodule "references/layaair-skills"]
+	path = references/layaair-skills
+	url = https://github.com/layabox/layaair-skills.git
