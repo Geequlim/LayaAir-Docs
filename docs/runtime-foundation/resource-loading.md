@@ -1,5 +1,5 @@
 ---
-title: "资源加载链路"
+title: "资源加载之后会经历什么"
 order: 5
 ---
 
@@ -267,7 +267,7 @@ await Laya.Scene.open("scenes/Main.ls");
 例如：
 
 ```ts
-const prefab = await Laya.loader.load("resources/prefab/Enemy.lh") as Prefab;
+const prefab = await Laya.loader.load("resources/prefab/Enemy.lh") as Laya.Prefab;
 ```
 
 它背后可能继续带出：
@@ -320,7 +320,7 @@ Laya.loader.clearRes("resources/ui/logo.png");
 
 ## 结论
 
-对 `LayaAir 3.4` 来说，理解 `Laya.loader.load()` 最重要的不是多记几种调用签名，而是先建立一条稳定主链：
+理解 `Laya.loader.load()` 最重要的不是多记几种调用签名，而是先建立一条稳定主链：
 
 1. 先识别 URL 和资源类型
 2. 再选择对应 loader

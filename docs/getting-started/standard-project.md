@@ -5,7 +5,7 @@ order: 2
 
 # 什么是标准 Laya 项目
 
-这里说的“标准 Laya 项目”，不是指必须按某个样例工程逐字照抄，而是指遵守 `LayaAir 3.4` 默认项目约定的一类项目结构：
+这里说的“标准 Laya 项目”，不是指必须按某个样例工程逐字照抄，而是指遵守 Laya 默认项目约定的一类项目结构：
 
 1. 根目录有 `.laya` 项目识别文件。
 2. 业务代码主要放在 `src/`。
@@ -182,7 +182,7 @@ assets/resources/ui/logo.png
 例如，`Laya.init()` 属于引擎启动，而不是 `.laya` 文件的职责：
 
 ```ts
-await Laya.init(0, 0);
+await Laya.init({ designWidth: 1334, designHeight: 750 });
 ```
 
 ### 启动场景或启动脚本

@@ -17,7 +17,7 @@ UI 资源最容易混乱的地方，不是 API 不会用，而是把几类完全
 
 在 2D UI 里，可以先用下面这条最实用的边界来判断：
 
-1. 会频繁变化的文案，优先保留为 `Laya.Text` 这类运行时文本。
+1. 会频繁变化的文案，优先保留为 `Laya.Label` 这类运行时文本。
 2. 会复用的独立图片，按业务目录管理为普通贴图或图集资源。
 3. 会反复一起出现的一组小图，再考虑做成图集。
 
@@ -29,7 +29,7 @@ UI 资源最容易混乱的地方，不是 API 不会用，而是把几类完全
 
 最常见的三种做法是：
 
-1. 系统字体或注册字体配合 `Laya.Text`
+1. 系统字体或注册字体配合 `Laya.Label`
 2. 位图字体
 3. 直接把字做进图片
 
@@ -47,7 +47,7 @@ UI 资源最容易混乱的地方，不是 API 不会用，而是把几类完全
 最小例子：
 
 ```ts
-const scoreText = new Laya.Text();
+const scoreText = new Laya.Label();
 scoreText.font = "Arial";
 scoreText.fontSize = 32;
 scoreText.color = "#ffffff";
@@ -79,7 +79,7 @@ Laya.stage.addChild(scoreText);
 ```ts
 await Laya.loader.load("resources/fonts/score.fnt", Laya.Loader.FONT);
 
-const score = new Laya.Text();
+const score = new Laya.Label();
 score.font = "score";
 score.text = "1280";
 Laya.stage.addChild(score);
@@ -124,7 +124,7 @@ Laya.stage.addChild(score);
 
 如果项目需要自定义字体文件，重点不是“能不能加载”，而是“这一套字体是否真的值得全局依赖”。
 
-这类字体通常需要先进入项目资源，再按运行时可用的字体名用于 `Laya.Text`。这里真正该先确认的是：字体是否稳定可用，以及是否真的需要全局引入这一份资源。
+这类字体通常需要先进入项目资源，再按运行时可用的字体名用于 `Laya.Label`。这里真正该先确认的是：字体是否稳定可用，以及是否真的需要全局引入这一份资源。
 
 对组织层面，更实用的约定是：
 

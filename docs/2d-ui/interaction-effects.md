@@ -165,6 +165,9 @@ Laya.timer.loop(1000, null, () => {
 最短例子：
 
 ```ts
+const { regClass } = Laya;
+
+@regClass()
 class PressEffect extends Laya.Script {
   onEnable(): void {
     this.owner.on(Laya.Event.MOUSE_DOWN, this, this.onDown);

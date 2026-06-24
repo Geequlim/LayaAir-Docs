@@ -1,5 +1,5 @@
 ---
-title: "引擎启动后的关键入口"
+title: "引擎启动后，运行时里有哪些关键入口"
 order: 1
 ---
 
@@ -145,7 +145,7 @@ const logo = await Laya.loader.load("resources/ui/logo.png");
 
 ## 三个 Timer 不是一回事
 
-很多人只记住 `Laya.timer`，但 `LayaAir 3.4` 在全局上实际暴露了三个计时器：
+很多人只记住 `Laya.timer`，但在全局上实际暴露了三个计时器：
 
 1. `Laya.timer`
 2. `Laya.systemTimer`
@@ -288,7 +288,7 @@ if (LayaEnv.isPreview) {
 
 ## 为什么有时“代码写对了，功能还是不可用”
 
-这类问题在 `LayaAir 3.4` 里很常见，而且往往不是语法错误，而是运行时入口背后的模块没有准备好。
+这类问题在运行时里很常见，而且往往不是语法错误，而是运行时入口背后的模块没有准备好。
 
 最常见的原因有两类。
 
@@ -377,7 +377,7 @@ if (LayaEnv.isPreview) {
 
 ## 结论
 
-对 `LayaAir 3.4` 来说，`Laya.init()` 之后最值得先掌握的不是更多零散 API，而是几条稳定的运行时入口关系：
+`Laya.init()` 之后最值得先掌握的不是更多零散 API，而是几条稳定的运行时入口关系：
 
 1. 用 `Laya.stage` 进入舞台和显示树
 2. 用 `Laya.loader` 让资源进入运行时

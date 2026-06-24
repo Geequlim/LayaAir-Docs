@@ -40,6 +40,8 @@ const animator = role.getComponent(Laya.Animator);
 animator?.play("Idle");
 ```
 
+这里假设模型资源里已经包含了名为 `Idle` 的动画片段或状态机配置。
+
 这段代码里真正成立的是这条链：
 
 1. `load()` 先把模型对应的层级资源和依赖资源准备好。

@@ -102,57 +102,18 @@ await Laya.Scene.open("scenes/Main.ls");
 
 ## 执行工程脚本
 
-另一类开发任务不是调试画面，而是让 CLI 帮你跑一段工程代码。
+调试阶段另一类任务不是看画面，而是让 CLI 跑一段工程代码——导出数据、批量处理资源、做一次独立校验等。这时用的是 `run --script`，它的定位是“在调试循环里插一段工程处理”，不是运行时业务逻辑。
 
-典型场景包括：
+从调试角度看，需要记住的只有两点：
 
-1. 导出数据
-2. 批量处理资源
-3. 生成配置文件
-4. 做一次独立校验
+1. 工程脚本执行和项目预览虽然都叫 `run`，但完全是两件事，不要混在一起
+2. 临时脚本适合一次性排查，不会自动变成项目正式资源
 
-这时用的是 `run --script`：
-
-```ts
-@IEditorEnv.regClass()
-export class MyTools {
-  static async run(output: string): Promise<void> {
-    console.log(output);
-  }
-}
-```
-
-```bash
-layaair run -p . --script=MyTools.run --script-args="dist/data.json"
-```
-
-这里最重要的是三点：
-
-1. `--script` 指向 `类名.静态方法名`
-2. 目标类需要先注册
-3. `--script-args` 传的是一整段参数字符串
-
-如果你写成实例方法，或者类没有注册，CLI 就不能按预期调用它。
-
-## 临时脚本适合一次性任务
-
-有些任务你不想正式放进项目里，只想临时执行一次，这时可以额外传入脚本文件：
-
-```bash
-layaair run -p . --script=AX.test --script-file=/tmp/a.ts
-```
-
-这更适合：
-
-1. 一次性排查
-2. 临时数据转换
-3. 短期验证某段工具逻辑
-
-它只影响当前这次执行，不等于把这个文件正式纳入项目工程。
+脚本注册方式、`--script` / `--script-args` / `--script-file` 的完整参数语义和示例，见 [layaair-cli.md](./layaair-cli.md) 的“`run --script` 执行工程脚本”一节。
 
 ## 一个顺手的开发循环
 
-对 `LayaAir 3.4` 来说，开发时比较顺手的命令行节奏通常是：
+开发时比较顺手的命令行节奏通常是：
 
 1. `layaair run -p .`，先把项目预览起来
 2. 修改启动链、场景脚本或资源后，再次观察预览结果

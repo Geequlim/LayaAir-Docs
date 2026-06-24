@@ -142,6 +142,8 @@ scene.addChild(cube);
 cube.meshRenderer.sharedMaterial = new Laya.BlinnPhongMaterial();
 ```
 
+`sharedMaterial` 直接共享同一个材质实例，`material` 会为当前渲染器克隆一份独立材质。
+
 这里值得先分清的是：
 
 1. `MeshSprite3D` 是节点对象

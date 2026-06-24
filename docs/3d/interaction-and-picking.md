@@ -154,6 +154,8 @@ collider.colliderShape = new Laya.BoxColliderShape(3, 2, 3);
 collider.isTrigger = true;
 ```
 
+触发器事件需要至少一方由物理模拟驱动（例如 Rigidbody3D），纯静态 PhysicsCollider 之间不会产生触发事件。
+
 这类对象通常用来表达：
 
 1. 进入门口范围时弹提示

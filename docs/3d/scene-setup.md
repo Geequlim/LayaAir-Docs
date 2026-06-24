@@ -195,9 +195,6 @@ scene.addChild(fxRoot);
 例如：
 
 ```ts
-const { regClass } = Laya;
-
-@regClass()
 class AutoSpin extends Laya.Script {
   onUpdate(): void {
     const owner = this.owner as Laya.Sprite3D;

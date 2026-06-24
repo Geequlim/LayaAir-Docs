@@ -191,4 +191,4 @@ layaair run -p . --script=AX.test --script-file=/tmp/a.ts
 4. 把 `run`、`build`、`validate` 混成同一件事
 5. 用 `run --script` 调实例方法，或者调用未注册的类
 
-对 LayaAir 3.4 来说，最稳妥的做法很简单：模板先查、平台先查、版本尽量写明、每个子命令只做它自己的事。
+最稳妥的做法很简单：模板先查、平台先查、版本尽量写明、每个子命令只做它自己的事。

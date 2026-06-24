@@ -214,6 +214,7 @@ camera.clearFlag = Laya.CameraClearFlags.Sky;
 例如：
 
 ```ts
+// layer 接索引, cullingMask 接位掩码
 box.layer = 1;
 camera.cullingMask = 1 << 1;
 ```
