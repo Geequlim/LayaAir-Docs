@@ -37,18 +37,18 @@ DocsModule:
           - label: 发布目标
             value: Pages
         paths:
-          - description: 了解当前文档站的组织方式，以及从哪里开始阅读。
+          - description: 了解标准 LayaAir 项目的结构、启动方式和核心对象关系。
             href: getting-started
             index: 01
-            title: 理解整理目标
-          - description: 对照官方中文文档，找出依赖图片视频、缺少文字解释或上下文断裂的部分。
-            externalUrl: https://github.com/layabox/LayaAir-Doc-ZH/tree/LayaAir3.4
+            title: 开始阅读
+          - description: 从运行时基础、场景预制体到 2D/3D 开发，按章节系统学习。
+            href: runtime-foundation
             index: 02
-            title: 对照官方资料
-          - description: 将整理后的 Markdown、图表和 LLM 入口纳入发布流程，优先服务 Agent 检索和复用，同时兼顾人类阅读。
-            href: AGENTS
+            title: 运行时与开发
+          - description: 对照官方中文文档，查看原始资料和引擎源码。
+            externalUrl: https://github.com/layabox/LayaAir-Doc-ZH/tree/LayaAir3.4
             index: 03
-            title: 维护与发布
+            title: 官方资料
         referenceUrl: https://github.com/layabox/LayaAir-Doc-ZH/tree/LayaAir3.4
         version: LayaAir 3.4
       path: ''
@@ -67,17 +67,6 @@ DocsModule:
       mermaid:
         output: source
     routePrefix: /LayaAir-Docs/
-  remaps:
-    AGENTS:
-      order: -1
-      space: Agent
-      target: AGENTS.md
-      title: AGENTS.md
-    getting-started:
-      order: -1
-      space: LayaAir 文档
-      target: README
-      title: 快速开始
   routePrefix: /LayaAir-Docs/
   search:
     emptyText: 没有找到相关文档
@@ -92,8 +81,14 @@ DocsModule:
     - dirs:
         - linkPrefix: ''
           path: docs
-          title: 快速开始
+          title: LayaAir 文档
       title: LayaAir 文档
+    - dirs:
+        - linkPrefix: ''
+          path: writing-plan
+          title: 写作规划
+      order: 200
+      title: 写作规划
     - agentSkillNoOrphanDirs: true
       dirs:
         - linkPrefix: agents/skills
